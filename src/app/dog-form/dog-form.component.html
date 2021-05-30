@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row input-group">
+    <!--Two way binding [()] ANY CHANGE IN THE INPUT WE CAN SEE IT IN CONSOLE OR SCREEN while property binding will be like []-->
+  <input class="form-control" [(ngModel)]="subBreed" placeholder="Sub-breed" />
+  <input class="form-control" [(ngModel)]="breed" placeholder="Breed" />
+
+  <!--DEFINE BUTTON FOR EVENT BINDING-->
+  <div class="input-group-append">
+      <button class="btn btn-primary" (click)="findDog()">Fetch!</button>
+  </div>
+  </div>
+
+  <!--IF here for inshuring thqat we will not see white dot if we did not fetch the url-->
+  <ng-template [ngIf]="dogUrl">
+  <div class="text-center">
+    <!--bind the dogUrl in the img to fetch it so in this case we will see it on the screen-->
+      <img class="img-fluid img-thumbnail" [src]="dogUrl" />
+  </div>
+  <!--create button to see more dogs with link to list , breed , and subbreed which is in dogs-list component-->
+  <button class="btn btn-lg btn-info" [routerLink]="['list', breed, subBreed]">See more</button>
+  </ng-template>
+
+  <!--If the app failed to fetch meaning for example we write somthing wrong in our input so in
+    this case we will see this message on our screen-->
+  <div *ngIf="failedToFetchDog">
+  <p>Failed to fetch dog from the breed: <b>{{ breed }}</b></p>
+  </div>
+</div>
